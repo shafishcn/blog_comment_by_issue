@@ -282,3 +282,11 @@ set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 `apt install net-tools`
 
 netstat -aptn
+
+## 十九、centos换源
+
+``` shell
+cd /etc/yum.repos.d/
+sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+```

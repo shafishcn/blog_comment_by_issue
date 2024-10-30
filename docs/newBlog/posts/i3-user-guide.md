@@ -1015,7 +1015,7 @@ sudo timedatectl set-ntp true
     ```
 
 ### 3.9 深度图片查看器、截图、文件管理器
-- `sudo pacman -S deepin-image-viewer deepin-screenshot deepin-file-manager ranger`
+- `sudo pacman -S deepin-image-viewer deepin-screenshot deepin-file-manager ranger flameshot`
 
 还是thunar好用
 
@@ -1763,12 +1763,82 @@ https://lunafoxgirlvt.itch.io/inochi-creator
 ### 3.34 音乐
 
 `sudo pacman -S elisa`
+`yay -S moosync`
 
 ### 3.35 视频剪辑
 
 `sudo pacman -S shotcut`
 
 4k屏幕下字体调整：`shotcut --QT_SCALE_FACTOR 1.5`
+
+### 3.36 画板
+
+https://wiki.archlinux.org/title/Graphics_tablet
+
+``` shell
+# 检查按板按钮id
+xev -event button
+1   2
+3   8
+9   10
+
+11  12
+13  14
+15  16
+```
+
+```
+// 画笔
+xsetwacom --set "Gaomon Gaomon Tablet_1060Pro Pad pad" Button 1 "key b"
+// 
+```
+
+#!/bin/sh
+xsetwacom –set “HUION Huion Tablet Pad pad” Button 1 key +ctrl +z -z -ctrl
+xsetwacom –set “HUION Huion Tablet Pad pad” Button 2 key +shift +e
+xsetwacom –set “HUION Huion Tablet Pad pad” Button 3 key +p
+xsetwacom –set “HUION Huion Tablet Pad pad” Button 8 key +shift + =
+xsetwacom –set “HUION Huion Tablet Pad pad” Button 9 key + –
+xsetwacom –set “HUION Huion Tablet Pad pad” Button 10 key + ]
+xsetwacom –set “HUION Huion Tablet Pad pad” Button 11 key + [
+xsetwacom –set “HUION Huion Tablet Pad pad” Button 12 key + m
+
+
+### 3.37 画图笔记
+
+`sudo pacman -S xournalpp`
+
+### 3.38 音乐制作
+
+`yay -S bitwig-studio`
+
+### 3.39 面捕
+
+``` 
+pyenv virtualenv 3.10.6 openseeface
+git clone https://github.com/emilianavt/OpenSeeFace
+cd OpenSeeFace
+pyenv local openseeface
+pip3 install onnxruntime opencv-python pillow numpy
+# 启动
+python facetracker.py -c 0 -W 1280 -H 720 --discard-after 0 --scan-every 0 --no-3d-adapt 1 --max-feature-updates 900
+
+python facetracker.py --ip 127.0.0.1 --port 11573 -c 0 -W 1280 -H 720 --discard-after 0 --scan-every 0 --no-3d-adapt 1 --max-feature-updates 900 --fps 30
+```
+openseeface + inochi session
+或者直接用 Puppetstring（推荐）
+
+### 3.40 视频粗剪
+
+`yay -S losslesscut-bin`
+
+### 3.41 系统提示命令
+
+``` shell
+notify-send -t 10000 -i '/home/shafish/Pictures/icon/2.png' 'HARDWORK' '工作一个半小时，站起来走走吧。'
+
+zenity --warning --text='工作一个半小时，站起来走走吧。'
+```
 
 ## 四、问题解决
 ### 4.1 开机启动失败
